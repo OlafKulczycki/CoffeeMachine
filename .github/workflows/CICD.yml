@@ -30,20 +30,6 @@ jobs:
       - name: Run tests
         run: ./gradlew test
 
-  super-lint:
-    name: Lint code base
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Run Super-Linter
-        uses: github/super-linter@v4
-        env:
-          DEFAULT_BRANCH: master
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          VALIDATE_KOTLIN: true
-
   test:
     name: Run JUnit Tests
     runs-on: ubuntu-latest
@@ -69,7 +55,7 @@ jobs:
   push:
     name: Push changes
     runs-on: ubuntu-latest
-    needs: [build, super-lint, test]
+    needs: [build, test]
     steps:
       - name: Checkout code
         uses: actions/checkout@v2

@@ -6,7 +6,7 @@ import java.io.InputStream
 
 class CoffeeMachineTest {
 
- lateinit var machine: CoffeeMachine
+    lateinit var machine: CoffeeMachine
 
  @BeforeEach
  fun setUp() {
