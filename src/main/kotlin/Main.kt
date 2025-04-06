@@ -105,8 +105,7 @@ class CoffeeMachine {
 
     fun remaining() {
         println(
-            "The coffee machine has:\n$waterCap ml of water\n$milkCap ml of milk\n" +
-                    "$beansCap g of coffee beans\n$cupsOrder disposable cups\n$$money" + " of money\n"
+            "The coffee machine has:\n$waterCap ml of water\n$milkCap ml of milk\n" + "$beansCap g of coffee beans\n$cupsOrder disposable cups\n$$money" + " of money\n"
         )
     }
 }
