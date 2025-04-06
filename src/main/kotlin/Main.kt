@@ -1,6 +1,6 @@
 class CoffeeMachine {
 
-    //variables
+    // variables
     var waterCap = 400
     var milkCap = 540
     var beansCap = 120
@@ -16,11 +16,10 @@ class CoffeeMachine {
     private val notCups = "Sorry, not enough cups!\n"
     private val notMilk = "Sorry, not enough milk!\n"
 
-    //functions
+    // functions
     fun buy() {
         println(
-            "What do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino," +
-                    " back - to main menu:"
+            "What do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino," + " back - to main menu:"
         )
         val choice = readln()
         if (choice == "1") {
@@ -103,8 +102,7 @@ class CoffeeMachine {
     fun remaining() {
         println(
             "The coffee machine has:\n$waterCap ml of water\n$milkCap ml of milk\n" +
-                    "$beansCap g of coffee beans\n$cupsOrder disposable cups\n$$money" +
-                    " of money\n"
+                    "$beansCap g of coffee beans\n$cupsOrder disposable cups\n$$money" + " of money\n"
         )
     }
 }
@@ -114,7 +112,7 @@ fun main() {
     val machine = CoffeeMachine()
     while (machine.exit) {
         println("Write action (buy, fill, take, remaining, exit):")
-        when(readln()) {
+        when (readln()) {
             "buy" -> machine.buy()
             "fill" -> machine.fill()
             "take" -> machine.take()
