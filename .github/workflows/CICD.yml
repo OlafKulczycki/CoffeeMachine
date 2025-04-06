@@ -30,9 +30,6 @@ jobs:
       - name: Run tests
         run: ./gradlew test
 
-      - name: Build project
-        run: npm run build
-
   super-lint:
     name: Lint code base
     runs-on: ubuntu-latest

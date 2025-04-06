@@ -35,8 +35,9 @@ class CoffeeMachine {
                 println(notCoffee)
             } else if (waterCap >= 250 && beansCap >= 16) {
                 println(notCups)
-            } else
+            } else {
                 println(notEnothRes)
+            }
         } else if (choice == "2") {
             if (waterCap >= 350 && milkCap >= 75 && beansCap >= 20 && cupsOrder > 0) {
                 println(enothResaurces)
@@ -53,8 +54,9 @@ class CoffeeMachine {
                 println(notCups)
             } else if (waterCap >= 350 && milkCap < 75 && beansCap >= 20 && cupsOrder > 0) {
                 println(notMilk)
-            } else
+            } else {
                 println(enothResaurces)
+            }
         } else if (choice == "3") {
             if (waterCap >= 200 && milkCap >= 100 && beansCap >= 12 && cupsOrder > 0) {
                 println(enothResaurces)
@@ -71,12 +73,14 @@ class CoffeeMachine {
                 println(notCups)
             } else if (waterCap >= 200 && milkCap < 100 && beansCap >= 12 && cupsOrder > 0) {
                 println(notMilk)
-            } else
+            } else {
                 println(notEnothRes)
-        } else if (choice == "back")
+            }
+        } else if (choice == "back") {
             return
-        else
+        } else {
             println(false)
+        }
     }
 
     fun fill() {
