@@ -23,6 +23,11 @@ class CoffeeMachine {
     }
 
     // Funktionen
+
+    /**
+     * Führt die Kaufaktion aus, bei der der Benutzer eine Kaffeesorte auswählt.
+     * Aktualisiert die Ressourcen der Maschine basierend auf der Auswahl.
+     */
     fun buy() {
         println("What do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino, back - to main menu:")
         when (readln()) {
@@ -34,6 +39,12 @@ class CoffeeMachine {
         }
     }
 
+    /**
+     * Bereitet den ausgewählten Kaffee zu, wenn genügend Ressourcen vorhanden sind.
+     * Reduziert die Ressourcen der Maschine entsprechend der Kaffeesorte.
+     *
+     * @param coffee Die ausgewählte Kaffeesorte.
+     */
     private fun makeCoffee(coffee: Coffee) {
         when {
             waterCap < coffee.water -> println(notWater)
@@ -51,6 +62,10 @@ class CoffeeMachine {
         }
     }
 
+    /**
+     * Füllt die Maschine mit zusätzlichen Ressourcen (Wasser, Milch, Bohnen, Becher).
+     * Fragt den Benutzer nach den Mengen, die hinzugefügt werden sollen.
+     */
     fun fill() {
         println("Write how many ml of water do you want to add:")
         val waterAdd = readln().toInt()
@@ -66,11 +81,17 @@ class CoffeeMachine {
         cupsOrder += cupsAdd
     }
 
+    /**
+     * Gibt das gesamte Geld aus der Maschine aus und setzt den Geldbetrag auf 0.
+     */
     fun take() {
         println("I gave you $$money\n")
         money = 0
     }
 
+    /**
+     * Zeigt den aktuellen Zustand der Maschine an, einschließlich der verfügbaren Ressourcen.
+     */
     fun remaining() {
         println(
             "The coffee machine has:\n$waterCap ml of water\n$milkCap ml of milk\n$beansCap g of coffee beans\n$cupsOrder disposable cups\n$$money of money\n"
