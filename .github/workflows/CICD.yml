@@ -6,7 +6,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
 
     steps:
       - name: Checkout code
@@ -16,7 +16,7 @@ jobs:
         uses: actions/setup-java@v2
         with:
           distribution: 'adopt'
-          java-version: '11'
+          java-version: '21'
 
       - name: Set up Gradle
         uses: gradle/gradle-build-action@v2
@@ -32,7 +32,7 @@ jobs:
 
   test:
     name: Run JUnit Tests
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -41,7 +41,7 @@ jobs:
         uses: actions/setup-java@v2
         with:
           distribution: 'adopt'
-          java-version: '11'
+          java-version: '21'
 
       - name: Set up Gradle
         uses: gradle/gradle-build-action@v2
@@ -54,7 +54,7 @@ jobs:
 
   push:
     name: Push changes
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     needs: [build, test]
     steps:
       - name: Checkout code
