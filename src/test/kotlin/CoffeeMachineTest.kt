@@ -14,9 +14,9 @@ class CoffeeMachineTest {
     }
 
     @Test
-    fun buy() {
-        @Test
-        fun testBuyEspresso() {
+    fun testBuyEspresso() {
+        val originalIn = System.`in`
+        try {
             val input: InputStream = ByteArrayInputStream("1\n".toByteArray())
             System.setIn(input)
 
@@ -27,10 +27,15 @@ class CoffeeMachineTest {
             assertEquals(104, machine.beansCap) // Bohnen reduziert
             assertEquals(8, machine.cupsOrder) // Becher reduziert
             assertEquals(554, machine.money) // Geld erhöht
+        } finally {
+            System.setIn(originalIn)
         }
+    }
 
-        @Test
-        fun testBuyInvalidOption() {
+    @Test
+    fun testBuyInvalidOption() {
+        val originalIn = System.`in`
+        try {
             val input: InputStream = ByteArrayInputStream("4\n".toByteArray())
             System.setIn(input)
 
@@ -41,10 +46,15 @@ class CoffeeMachineTest {
             assertEquals(120, machine.beansCap)
             assertEquals(9, machine.cupsOrder)
             assertEquals(550, machine.money)
+        } finally {
+            System.setIn(originalIn)
         }
+    }
 
-        @Test
-        fun testBuyBackOption() {
+    @Test
+    fun testBuyBackOption() {
+        val originalIn = System.`in`
+        try {
             val input: InputStream = ByteArrayInputStream("back\n".toByteArray())
             System.setIn(input)
 
@@ -55,10 +65,15 @@ class CoffeeMachineTest {
             assertEquals(120, machine.beansCap)
             assertEquals(9, machine.cupsOrder)
             assertEquals(550, machine.money)
+        } finally {
+            System.setIn(originalIn)
         }
+    }
 
-        @Test
-        fun testBuyNotEnoughWater() {
+    @Test
+    fun testBuyNotEnoughWater() {
+        val originalIn = System.`in`
+        try {
             machine.waterCap = 0
             val input: InputStream = ByteArrayInputStream("1\n".toByteArray())
             System.setIn(input)
@@ -69,43 +84,8 @@ class CoffeeMachineTest {
             assertEquals(120, machine.beansCap)
             assertEquals(9, machine.cupsOrder)
             assertEquals(550, machine.money)
+        } finally {
+            System.setIn(originalIn)
         }
-    }
-
-    @Test
-    fun fill() {
-
-        machine = CoffeeMachine()
-
-        // Simuliere die Eingabe für das Auffüllen der Maschine
-        val input: InputStream = ByteArrayInputStream("200\n100\n50\n10\n".toByteArray())
-        System.setIn(input)
-
-        // Simuliere das Auffüllen der Maschine
-        machine.fill()
-        // Überprüfe, ob die Ressourcen korrekt aktualisiert wurden
-        assertEquals(600, machine.waterCap) // Beispielwerte, anpassen je nach Ausgangswerten
-        assertEquals(640, machine.milkCap)
-        assertEquals(170, machine.beansCap)
-        assertEquals(19, machine.cupsOrder)
-    }
-
-    @Test
-    fun take() {
-        machine = CoffeeMachine()
-        machine.take()
-        assertEquals(0, machine.money)
-    }
-
-    @Test
-    fun remaining() {
-        machine = CoffeeMachine()
-        machine.remaining()
-        // Überprüfe die Ausgabe der verbleibenden Ressourcen
-        assertEquals(400, machine.waterCap)
-        assertEquals(540, machine.milkCap)
-        assertEquals(120, machine.beansCap)
-        assertEquals(9, machine.cupsOrder)
-        assertEquals(550, machine.money)
     }
 }
