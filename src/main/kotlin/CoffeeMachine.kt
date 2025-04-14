@@ -1,6 +1,6 @@
 class CoffeeMachine {
 
-    // variables
+    // Variablen
     var waterCap = 400
     var milkCap = 540
     var beansCap = 120
@@ -8,78 +8,46 @@ class CoffeeMachine {
     var money = 550
     var exit = true
 
-    //  String variables
-    private val enothResaurces = "I have enough resources, making you a coffee!\n"
-    private val notEnothRes = "Sorry, i haven't enough resources, making you a coffee!\n"
+    // String-Variablen
+    private val enoughResources = "I have enough resources, making you a coffee!\n"
     private val notWater = "Sorry, not enough water!\n"
     private val notCoffee = "Sorry, not enough coffee beans!\n"
     private val notCups = "Sorry, not enough cups!\n"
     private val notMilk = "Sorry, not enough milk!\n"
 
-    // functions
+    // Kaffee-Typen
+    private enum class Coffee(val water: Int, val milk: Int, val beans: Int, val cost: Int) {
+        ESPRESSO(250, 0, 16, 4),
+        LATTE(350, 75, 20, 7),
+        CAPPUCCINO(200, 100, 12, 6)
+    }
+
+    // Funktionen
     fun buy() {
-        println(
-            "What do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino," + " back - to main menu:"
-        )
-        val choice = readln()
-        if (choice == "1") {
-            if (waterCap >= 250 && beansCap >= 16 && cupsOrder > 0) {
-                println(enothResaurces)
-                waterCap -= 250
-                beansCap -= 16
+        println("What do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino, back - to main menu:")
+        when (readln()) {
+            "1" -> makeCoffee(Coffee.ESPRESSO)
+            "2" -> makeCoffee(Coffee.LATTE)
+            "3" -> makeCoffee(Coffee.CAPPUCCINO)
+            "back" -> return
+            else -> println(false)
+        }
+    }
+
+    private fun makeCoffee(coffee: Coffee) {
+        when {
+            waterCap < coffee.water -> println(notWater)
+            milkCap < coffee.milk -> println(notMilk)
+            beansCap < coffee.beans -> println(notCoffee)
+            cupsOrder <= 0 -> println(notCups)
+            else -> {
+                println(enoughResources)
+                waterCap -= coffee.water
+                milkCap -= coffee.milk
+                beansCap -= coffee.beans
                 cupsOrder--
-                money += 4
-            } else if (waterCap < 250 && beansCap >= 16 && cupsOrder > 0) {
-                println(notWater)
-            } else if (waterCap >= 250 && beansCap < 16 && cupsOrder > 0) {
-                println(notCoffee)
-            } else if (waterCap >= 250 && beansCap >= 16) {
-                println(notCups)
-            } else {
-                println(notEnothRes)
+                money += coffee.cost
             }
-        } else if (choice == "2") {
-            if (waterCap >= 350 && milkCap >= 75 && beansCap >= 20 && cupsOrder > 0) {
-                println(enothResaurces)
-                waterCap -= 350
-                milkCap -= 75
-                beansCap -= 20
-                cupsOrder--
-                money += 7
-            } else if (waterCap < 350 && milkCap >= 75 && beansCap >= 20 && cupsOrder > 0) {
-                println(notWater)
-            } else if (waterCap >= 350 && milkCap >= 75 && beansCap < 20 && cupsOrder > 0) {
-                println(notCoffee)
-            } else if (waterCap >= 350 && milkCap >= 75 && beansCap >= 20 && cupsOrder < 0) {
-                println(notCups)
-            } else if (waterCap >= 350 && milkCap < 75 && beansCap >= 20 && cupsOrder > 0) {
-                println(notMilk)
-            } else {
-                println(enothResaurces)
-            }
-        } else if (choice == "3") {
-            if (waterCap >= 200 && milkCap >= 100 && beansCap >= 12 && cupsOrder > 0) {
-                println(enothResaurces)
-                waterCap -= 200
-                milkCap -= 100
-                beansCap -= 12
-                cupsOrder--
-                money += 6
-            } else if (waterCap < 200 && milkCap >= 100 && beansCap >= 12 && cupsOrder > 0) {
-                println(notWater)
-            } else if (waterCap >= 200 && milkCap >= 100 && beansCap < 12 && cupsOrder > 0) {
-                println(notCoffee)
-            } else if (waterCap >= 200 && milkCap >= 100 && beansCap >= 12 && cupsOrder < 0) {
-                println(notCups)
-            } else if (waterCap >= 200 && milkCap < 100 && beansCap >= 12 && cupsOrder > 0) {
-                println(notMilk)
-            } else {
-                println(notEnothRes)
-            }
-        } else if (choice == "back") {
-            return
-        } else {
-            println(false)
         }
     }
 
